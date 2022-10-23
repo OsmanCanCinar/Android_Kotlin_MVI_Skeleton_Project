@@ -2,7 +2,6 @@ object Dependencies {
 
     object AndroidX {
         const val APPCOMPAT = "androidx.appcompat:appcompat:${Versions.AndroidX.APPCOMPAT}"
-        const val ACTIVITY = "androidx.activity:activity-ktx:${Versions.AndroidX.ACTIVITY}"
         const val KTX_CORE = "androidx.core:core-ktx:${Versions.AndroidX.KTX_CORE}"
         const val LIFE_CYCLE =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.LIFE_CYCLE}"
@@ -25,12 +24,15 @@ object Dependencies {
 
     object Google {
         const val GSON = "com.google.code.gson:gson:${Versions.Google.GSON}"
+        const val HILT = "com.google.dagger:hilt-android:${Versions.Google.HILT}"
+        const val HILT_COMPILER = "com.google.dagger:hilt-compiler:${Versions.Google.HILT}"
         const val MATERIAL = "com.google.android.material:material:${Versions.Google.MATERIAL}"
     }
 
     object Gradle {
         const val ANDROID_APP = "com.android.application"
         const val ANDROID_LIBRARY = "com.android.library"
+        const val HILT = "com.google.dagger.hilt.android"
         const val JETBRAINS_KOTLIN = "org.jetbrains.kotlin.android"
         const val KOTLIN_KAPT = "kotlin-kapt"
         const val KOTLIN_ANDROID = "kotlin-android"
@@ -61,7 +63,6 @@ object Dependencies {
 object Versions {
     object AndroidX {
         const val APPCOMPAT = "1.5.1"
-        const val ACTIVITY = "1.6.0"
         const val KTX_CORE = "1.8.0"
         const val LIFE_CYCLE = "2.5.1"
         const val NAVIGATION = "2.5.2"
@@ -72,6 +73,7 @@ object Versions {
 
     object Google {
         const val GSON = "2.9.1"
+        const val HILT = "2.44"
         const val MATERIAL = "1.7.0"
     }
 

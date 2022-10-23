@@ -1,9 +1,10 @@
 plugins {
     id(Dependencies.Gradle.ANDROID_APP)
+    id(Dependencies.Gradle.HILT)
     id(Dependencies.Gradle.JETBRAINS_KOTLIN)
     id(Dependencies.Gradle.KOTLIN_ANDROID)
-    id(Dependencies.Gradle.KOTLIN_KAPT)
     id(Dependencies.Gradle.SAFE_ARGS)
+    id(Dependencies.Gradle.KOTLIN_KAPT)
 }
 
 android {
@@ -57,8 +58,9 @@ dependencies {
     implementation(Dependencies.AndroidX.ROOM_RUN_TIME)
     implementation(Dependencies.AndroidX.ROOM_RXJAVA3)
     implementation(Dependencies.AndroidX.SWIPER_REFRESH)
-    implementation(Dependencies.Google.MATERIAL)
     implementation(Dependencies.Google.GSON)
+    implementation(Dependencies.Google.HILT)
+    implementation(Dependencies.Google.MATERIAL)
     implementation(Dependencies.Util.GLIDE)
     implementation(Dependencies.Util.JETBRAINS_COROUTINES)
     implementation(Dependencies.Util.RETROFIT)
@@ -69,10 +71,15 @@ dependencies {
     implementation(Dependencies.Util.RETROFIT_RXJAVA)
     implementation(Dependencies.Util.RXJAVA)
     implementation(Dependencies.Util.RXJAVA_ANDROID)
-    kapt(Dependencies.Util.GLIDE)
-    kapt(Dependencies.AndroidX.ROOM_COMPILER)
     testImplementation(Dependencies.Test.JUNIT)
     testImplementation(Dependencies.Test.ANDROIDX_JUNIT)
     testImplementation(Dependencies.Test.ESPRESSO_CORE)
+    kapt(Dependencies.AndroidX.ROOM_COMPILER)
+    kapt(Dependencies.Google.HILT_COMPILER)
+    kapt(Dependencies.Util.GLIDE)
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
