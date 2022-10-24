@@ -1,28 +1,29 @@
 plugins {
-    id(Dependencies.Gradle.ANDROID_APP)
-    id(Dependencies.Gradle.HILT)
-    id(Dependencies.Gradle.JETBRAINS_KOTLIN)
-    id(Dependencies.Gradle.KOTLIN_ANDROID)
-    id(Dependencies.Gradle.SAFE_ARGS)
-    id(Dependencies.Gradle.KOTLIN_KAPT)
+    id(GradlePluginId.ANDROID_APP)
+    id(GradlePluginId.HILT)
+    id(GradlePluginId.KOTLIN_JETBRAINS)
+    id(GradlePluginId.KOTLIN_ANDROID)
+    id(GradlePluginId.SAFE_ARGS)
+    id(GradlePluginId.KOTLIN_KAPT)
 }
 
 android {
-    namespace = "com.osmancancinar.skeleton"
-    compileSdk = 32
+    namespace = ApplicationConfig.APPLICATION_ID
+    compileSdk = ApplicationConfig.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.osmancancinar.skeleton"
-        minSdk = 23
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = ApplicationConfig.APPLICATION_ID
+        minSdk = ApplicationConfig.MIN_SDK
+        targetSdk = ApplicationConfig.TARGET_SDK
+        versionCode = ApplicationConfig.VERSION_CODE
+        versionName = ApplicationConfig.VERSION_NAME
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = ApplicationConfig.TEST_INST_RUNNER
     }
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     buildTypes {
@@ -36,47 +37,54 @@ android {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = ApplicationConfig.JAVA
+        targetCompatibility = ApplicationConfig.JAVA
+    }
+
+    compileOptions {
+        sourceCompatibility = ApplicationConfig.JAVA
+        targetCompatibility = ApplicationConfig.JAVA
     }
 
     kotlinOptions {
-        jvmTarget = Versions.Util.JVM_TARGET
+        jvmTarget = ApplicationConfig.JVM_TARGET
     }
 }
 
 dependencies {
-    implementation(Dependencies.AndroidX.APPCOMPAT)
-    implementation(Dependencies.AndroidX.KTX_CORE)
-    implementation(Dependencies.AndroidX.LIFE_CYCLE)
-    implementation(Dependencies.AndroidX.LIFE_CYCLE_SAVED_STATE)
-    implementation(Dependencies.AndroidX.LIVE_DATA)
-    implementation(Dependencies.AndroidX.NAVIGATION)
-    implementation(Dependencies.AndroidX.NAVIGATION_UI)
-    implementation(Dependencies.AndroidX.PREFERENCE)
-    implementation(Dependencies.AndroidX.ROOM)
-    implementation(Dependencies.AndroidX.ROOM_RUN_TIME)
-    implementation(Dependencies.AndroidX.ROOM_RXJAVA3)
-    implementation(Dependencies.AndroidX.SWIPER_REFRESH)
-    implementation(Dependencies.Google.GSON)
-    implementation(Dependencies.Google.HILT)
-    implementation(Dependencies.Google.MATERIAL)
-    implementation(Dependencies.Util.GLIDE)
-    implementation(Dependencies.Util.JETBRAINS_COROUTINES)
-    implementation(Dependencies.Util.RETROFIT)
-    {
-        exclude(module = "okhttp")
-    }
-    implementation(Dependencies.Util.RETROFIT_GSON)
-    implementation(Dependencies.Util.RETROFIT_RXJAVA)
-    implementation(Dependencies.Util.RXJAVA)
-    implementation(Dependencies.Util.RXJAVA_ANDROID)
+    implementation(Dependencies.Android.APPCOMPAT)
+    implementation(Dependencies.Android.MATERIAL)
+    implementation(Dependencies.Android.SWIPE_LAYOUT)
+    implementation(Dependencies.Android.PREFERENCE)
+    implementation(Dependencies.Android.Navigation.FRAGMENT)
+    implementation(Dependencies.Android.Navigation.UI)
+    implementation(Dependencies.Android.Room.CORE)
+    implementation(Dependencies.Android.Room.RUN_TIME)
+    implementation(Dependencies.Android.Room.ADAPTER_RXJAVA3)
+    implementation(Dependencies.Android.LifeCycle.VIEW_MODEL)
+    implementation(Dependencies.Android.LifeCycle.VM_SAVED_STATE)
+    implementation(Dependencies.Android.LifeCycle.LIVE_DATA)
+    implementation(Dependencies.Android.Ktx.ACTIVITY)
+    implementation(Dependencies.Android.Ktx.FRAGMENT)
+    implementation(Dependencies.Android.Ktx.CORE)
+    implementation(Dependencies.Injection.CORE)
+    implementation(Dependencies.Injection.NAVIGATION)
+    implementation(Dependencies.Utilities.JETBRAINS_COROUTINES)
+    implementation(Dependencies.Utilities.Glide.CORE)
+    implementation(Dependencies.Utilities.Retrofit.CORE)
+    implementation(Dependencies.Utilities.Retrofit.GSON)
+    implementation(Dependencies.Utilities.Retrofit.CONVERTER_GSON)
+    implementation(Dependencies.Utilities.Retrofit.ADAPTER_RXJAVA)
+    implementation(Dependencies.Utilities.RxJava.CORE)
+    implementation(Dependencies.Utilities.RxJava.ANDROID)
+
     testImplementation(Dependencies.Test.JUNIT)
     testImplementation(Dependencies.Test.ANDROIDX_JUNIT)
     testImplementation(Dependencies.Test.ESPRESSO_CORE)
-    kapt(Dependencies.AndroidX.ROOM_COMPILER)
-    kapt(Dependencies.Google.HILT_COMPILER)
-    kapt(Dependencies.Util.GLIDE)
+
+    kapt(Dependencies.Android.Room.COMPILER)
+    kapt(Dependencies.Injection.COMPILER)
+    kapt(Dependencies.Utilities.Glide.COMPILER)
 }
 
 kapt {
