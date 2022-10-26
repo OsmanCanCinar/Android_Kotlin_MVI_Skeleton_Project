@@ -13,13 +13,20 @@ class GetData constructor(
     private val networkDataSource: NetworkDataSource
 ) {
 
+    // get from network and store in db
     suspend fun execute(): Flow<DataState<List<Model>>> = flow {
         emit(DataState.Loading)
         delay(1000)
-        val networkBlogs = networkDataSource.get()
-        cacheDataSource.insertList(networkBlogs)
-        val cachedBlogs = cacheDataSource.get()
-        emit(DataState.Success(cachedBlogs))
+        val networkModels = networkDataSource.get()
+        cacheDataSource.insertAll(networkModels)
+        val cachedModels = cacheDataSource.getAll()
+        emit(DataState.Success(cachedModels))
     }
 
+    // get from db
+    suspend fun executeDetail(itemId: Int): Flow<DataState<Model>> = flow {
+        emit(DataState.Loading)
+        val cachedModels = cacheDataSource.get(itemId)
+        emit(DataState.Success(cachedModels))
+    }
 }

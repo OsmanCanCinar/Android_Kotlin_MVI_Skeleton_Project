@@ -6,7 +6,11 @@ interface CacheDataSource {
 
     suspend fun insert(model: Model): Long
 
-    suspend fun insertList(models: List<Model>)
+    suspend fun insertAll(models: List<Model>)
 
-    suspend fun get(): List<Model>
+    suspend fun getAll(): List<Model>
+
+    suspend fun get(id: Int): Model
+
+    suspend fun deleteAll()
 }

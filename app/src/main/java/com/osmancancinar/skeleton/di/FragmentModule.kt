@@ -15,8 +15,6 @@ object FragmentModule {
     @Singleton
     @Provides
     fun provideRepository(): FragmentFactory {
-    //fun provideRepository(string: String): FragmentFactory {
-        //return MainFragmentFactory(string)
         return MainFragmentFactory()
     }
 }

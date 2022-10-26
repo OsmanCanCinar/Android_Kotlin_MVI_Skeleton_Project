@@ -14,13 +14,21 @@ constructor(
         return daoService.insert(cacheMapper.mapToEntity(model))
     }
 
-    override suspend fun insertList(models: List<Model>) {
+    override suspend fun insertAll(models: List<Model>) {
         for (model in models) {
             daoService.insert(cacheMapper.mapToEntity(model))
         }
     }
 
-    override suspend fun get(): List<Model> {
-        return cacheMapper.mapFromEntityList(daoService.get())
+    override suspend fun getAll(): List<Model> {
+        return cacheMapper.mapFromEntityList(daoService.getAll())
+    }
+
+    override suspend fun get(id: Int): Model {
+        return cacheMapper.mapFromEntity(daoService.get(id))
+    }
+
+    override suspend fun deleteAll() {
+        return daoService.deleteAll()
     }
 }

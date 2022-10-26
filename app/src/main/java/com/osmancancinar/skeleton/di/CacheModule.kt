@@ -61,5 +61,4 @@ object CacheModule {
     ): CacheDataSource {
         return CacheDataSourceImpl(daoService, cacheMapper)
     }
-
 }

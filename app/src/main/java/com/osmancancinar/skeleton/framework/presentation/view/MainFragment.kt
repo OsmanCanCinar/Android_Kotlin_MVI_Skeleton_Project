@@ -1,35 +1,50 @@
-package com.osmancancinar.skeleton.framework.presentation
+package com.osmancancinar.skeleton.framework.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.osmancancinar.skeleton.R
 import com.osmancancinar.skeleton.business.domain.models.Model
 import com.osmancancinar.skeleton.business.domain.state.DataState
 import com.osmancancinar.skeleton.databinding.FragmentMainBinding
+import com.osmancancinar.skeleton.framework.presentation.viewmodel.MainStateEvent
+import com.osmancancinar.skeleton.framework.presentation.viewmodel.MainViewModel
+import com.osmancancinar.skeleton.framework.presentation.adapter.RecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment constructor(
-    //private val string: String
-) : Fragment() {
+class MainFragment() : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+    private val recyclerAdapter by lazy { RecyclerViewAdapter() }
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var toolBarTitle: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeObservers()
+
+        toolBarTitle = requireActivity().findViewById(R.id.toolbar_title)
+        toolBarTitle.setText(R.string.characters_text)
+
         viewModel.setStateEvent(MainStateEvent.GetDataEvents)
+
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = recyclerAdapter
+        }
+
+        subscribeObservers()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(LayoutInflater.from(context), container, false)
@@ -41,7 +56,8 @@ class MainFragment constructor(
             when (dataState) {
                 is DataState.Success<List<Model>> -> {
                     displayProgressBar(false)
-                    appendContent(dataState.data)
+                    recyclerAdapter.setData(dataState.data)
+
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
@@ -54,20 +70,11 @@ class MainFragment constructor(
         })
     }
 
-    private fun displayError(message: String?) {
-        if(message != null) binding.text.text = message else binding.text.text = "Unknown error."
-    }
-
     private fun displayProgressBar(isDisplayed: Boolean) {
-        binding.progressBar.visibility = if(isDisplayed) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
-    private fun appendContent(models: List<Model>) {
-
-        val sb = StringBuilder()
-        for(model in models){
-            sb.append(model.name + "\n")
-        }
-        binding.text.text = sb.toString()
+    private fun displayError(message: String?) {
+        //if (message != null) binding.text.text = message else binding.text.text = "Unknown error."
     }
 }

@@ -6,5 +6,9 @@ interface DaoService {
 
     suspend fun insert(cacheEntity: CacheEntity): Long
 
-    suspend fun get(): List<CacheEntity>
+    suspend fun getAll(): List<CacheEntity>
+
+    suspend fun get(id: Int): CacheEntity
+
+    suspend fun deleteAll()
 }

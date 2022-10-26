@@ -1,4 +1,4 @@
-package com.osmancancinar.skeleton.framework.presentation
+package com.osmancancinar.skeleton.framework.presentation.viewmodel
 
 import androidx.lifecycle.*
 import com.osmancancinar.skeleton.business.domain.models.Model

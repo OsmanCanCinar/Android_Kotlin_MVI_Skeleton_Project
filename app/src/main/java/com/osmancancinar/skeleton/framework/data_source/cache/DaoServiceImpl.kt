@@ -11,7 +11,15 @@ class DaoServiceImpl constructor(
         return dao.insert(cacheEntity)
     }
 
-    override suspend fun get(): List<CacheEntity> {
-        return dao.get()
+    override suspend fun getAll(): List<CacheEntity> {
+        return dao.getAll()
+    }
+
+    override suspend fun get(id: Int): CacheEntity {
+        return dao.get(id)
+    }
+
+    override suspend fun deleteAll() {
+        return dao.deleteAll()
     }
 }

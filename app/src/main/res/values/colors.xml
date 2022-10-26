@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Arc Dark Color Palette-->
+    <color name="darkest_color">#FF404552</color>
+    <color name="dark_color">#FF383C4A</color>
+    <color name="normal_color">#FF4B5162</color>
+    <color name="light_color">#FF54BBC4</color>
+    <color name="lightest_color">#FF7C818C</color>
+    <color name="yellow_color">#FFF9F871</color>
 </resources>

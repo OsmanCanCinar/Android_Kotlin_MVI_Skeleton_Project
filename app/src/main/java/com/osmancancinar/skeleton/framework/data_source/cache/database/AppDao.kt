@@ -13,5 +13,11 @@ interface AppDao {
     suspend fun insert(data: CacheEntity): Long
 
     @Query("SELECT * FROM cached_response")
-    suspend fun get(): List<CacheEntity>
+    suspend fun getAll(): List<CacheEntity>
+
+    @Query("SELECT * FROM cached_response WHERE id = :id")
+    suspend fun get(id: Int): CacheEntity
+
+    @Query("DELETE FROM cached_response")
+    suspend fun deleteAll()
 }

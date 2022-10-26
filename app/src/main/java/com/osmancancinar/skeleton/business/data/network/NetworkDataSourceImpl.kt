@@ -7,8 +7,7 @@ import com.osmancancinar.skeleton.framework.data_source.network.mappers.NetworkM
 class NetworkDataSourceImpl constructor(
     private val retrofitService: RetrofitService,
     private val networkMapper: NetworkMapper
-): NetworkDataSource {
-
+) : NetworkDataSource {
     override suspend fun get(): List<Model> {
         return networkMapper.mapFromEntityList(retrofitService.get())
     }
