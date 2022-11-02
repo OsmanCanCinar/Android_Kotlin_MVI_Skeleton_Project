@@ -6,7 +6,8 @@ import com.osmancancinar.skeleton.framework.presentation.view.DetailFragment
 import com.osmancancinar.skeleton.framework.presentation.view.MainFragment
 import javax.inject.Inject
 
-class MainFragmentFactory @Inject constructor(
+//Interface used to control the instantiation of Fragment instances.
+class FragmentFactory @Inject constructor(
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
@@ -21,6 +22,5 @@ class MainFragmentFactory @Inject constructor(
             }
             else -> super.instantiate(classLoader, className)
         }
-
     }
 }

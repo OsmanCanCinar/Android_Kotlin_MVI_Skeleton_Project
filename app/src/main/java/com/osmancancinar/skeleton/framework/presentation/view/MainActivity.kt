@@ -9,10 +9,11 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.osmancancinar.skeleton.R
 import com.osmancancinar.skeleton.databinding.ActivityMainBinding
-import com.osmancancinar.skeleton.framework.presentation.MainFragmentFactory
+import com.osmancancinar.skeleton.framework.presentation.FragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// Main Activity of the Application, has setup of the app navigation and custom toolbar.
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolBarTitle: TextView
 
     @Inject
-    lateinit var fragmentFactory: MainFragmentFactory
+    lateinit var fragmentFactory: FragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

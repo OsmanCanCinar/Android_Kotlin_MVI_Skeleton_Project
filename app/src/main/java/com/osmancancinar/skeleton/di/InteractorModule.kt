@@ -9,6 +9,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Dependency Injection for interactors.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object InteractorModule {

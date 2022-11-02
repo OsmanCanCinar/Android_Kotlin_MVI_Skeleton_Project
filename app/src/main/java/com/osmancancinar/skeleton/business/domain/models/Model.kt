@@ -1,5 +1,8 @@
 package com.osmancancinar.skeleton.business.domain.models
 
+/**
+ * Data model that will be displayed in the UI.
+ */
 data class Model(
     var id: Int,
     var name: String,

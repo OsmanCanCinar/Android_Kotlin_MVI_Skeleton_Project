@@ -3,6 +3,7 @@ package com.osmancancinar.skeleton.framework.data_source.network.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+//  Network Entities represent attributes of the network response object.
 data class NetworkEntity(
 
     @SerializedName("pk")

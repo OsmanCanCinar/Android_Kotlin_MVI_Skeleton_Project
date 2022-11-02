@@ -10,17 +10,21 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * View Model for Detail Fragment, uses getData to manage data.
+ */
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getData: GetData,
-    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    // Data State as Live Data
     private val _dataState: MutableLiveData<DataState<Model>> = MutableLiveData()
 
     val dataState: LiveData<DataState<Model>>
         get() = _dataState
 
+    // Gets data by setting state.
     fun setStateEvent(detailStateEvent: DetailStateEvent, itemId: Int) {
         viewModelScope.launch {
             when (detailStateEvent) {
@@ -37,6 +41,7 @@ class DetailViewModel @Inject constructor(
     }
 }
 
+// Custom Data State
 sealed class DetailStateEvent {
     object GetDataEvents : DetailStateEvent()
     object None : DetailStateEvent()

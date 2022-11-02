@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//  Data Entities represent tables in the database.
 @Entity(tableName = "cached_response")
 data class CacheEntity(
 

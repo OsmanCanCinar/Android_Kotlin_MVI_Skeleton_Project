@@ -8,6 +8,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+/**
+ * Get Data Manages data state and interactions of the App by using cache and network data sources.
+ */
 class GetData constructor(
     private val cacheDataSource: CacheDataSource,
     private val networkDataSource: NetworkDataSource
@@ -16,7 +19,6 @@ class GetData constructor(
     // get from network and store in db
     suspend fun execute(): Flow<DataState<List<Model>>> = flow {
         emit(DataState.Loading)
-        delay(1000)
         val networkModels = networkDataSource.get()
         cacheDataSource.insertAll(networkModels)
         val cachedModels = cacheDataSource.getAll()

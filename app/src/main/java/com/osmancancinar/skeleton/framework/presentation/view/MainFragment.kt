@@ -18,6 +18,9 @@ import com.osmancancinar.skeleton.framework.presentation.viewmodel.MainViewModel
 import com.osmancancinar.skeleton.framework.presentation.adapter.RecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main Fragment to display home page.
+ */
 @AndroidEntryPoint
 class MainFragment() : Fragment() {
 
@@ -29,11 +32,14 @@ class MainFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set Custom Toolbar
         toolBarTitle = requireActivity().findViewById(R.id.toolbar_title)
         toolBarTitle.setText(R.string.characters_text)
 
+        // Set Data State
         viewModel.setStateEvent(MainStateEvent.GetDataEvents)
 
+        // Setup Recycler View
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerAdapter
@@ -42,6 +48,7 @@ class MainFragment() : Fragment() {
         subscribeObservers()
     }
 
+    // View Binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,13 +58,13 @@ class MainFragment() : Fragment() {
         return binding.root
     }
 
+    // Subscribes to the live data of Data State
     private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
             when (dataState) {
                 is DataState.Success<List<Model>> -> {
                     displayProgressBar(false)
-                    recyclerAdapter.setData(dataState.data)
-
+                    feedDataToAdapter(dataState.data)
                 }
                 is DataState.Error -> {
                     displayProgressBar(false)
@@ -70,11 +77,21 @@ class MainFragment() : Fragment() {
         })
     }
 
+    // Feeds the adapter.
+    private fun feedDataToAdapter(models: List<Model>) {
+        recyclerAdapter.setData(models)
+    }
+
+    // Displays progress bar while loading.
     private fun displayProgressBar(isDisplayed: Boolean) {
         binding.progressBar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
+    // Displays when error occurs.
     private fun displayError(message: String?) {
-        //if (message != null) binding.text.text = message else binding.text.text = "Unknown error."
+        if (message != null) binding.errorText.text = message else binding.errorText.text =
+            getString(
+                R.string.unknown_error
+            )
     }
 }

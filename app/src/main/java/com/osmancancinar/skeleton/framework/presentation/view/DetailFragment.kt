@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.osmancancinar.skeleton.R
@@ -16,6 +17,9 @@ import com.osmancancinar.skeleton.framework.presentation.viewmodel.DetailStateEv
 import com.osmancancinar.skeleton.framework.presentation.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main Fragment to display detail page.
+ */
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
@@ -27,31 +31,37 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Get Safe Args
         arguments?.let {
             itemId = DetailFragmentArgs.fromBundle(it).itemId
         }
 
+        // Set Custom Toolbar
         toolBarTitle = requireActivity().findViewById(R.id.toolbar_title)
         toolBarTitle.setText(R.string.details_text)
 
+        // Set Data State
         itemId?.let { viewModel.setStateEvent(DetailStateEvent.GetDataEvents, it) }
 
         subscribeObservers()
     }
 
+    // Data Binding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            FragmentDetailBinding.inflate(
-                LayoutInflater.from(context),
-                container,
-                false
-            )
+        // View Binding
+        //binding = FragmentDetailBinding.inflate(LayoutInflater.from(context), container, false)
+
+        // Data Binding
+        binding = DataBindingUtil.inflate<FragmentDetailBinding?>(inflater, R.layout.fragment_detail, container, false)
+
         return binding.root
     }
 
+    // Subscribes to the live data of Data State
     private fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
             when (dataState) {
@@ -70,15 +80,25 @@ class DetailFragment : Fragment() {
         })
     }
 
+    // Set data with data binding.
     private fun feedDataToViews(model: Model) {
-        binding.detailText.text = model.name
+        // View Binding
+        //binding.detailText.text = model.name
+
+        // Data Binding
+        binding.model = model
     }
 
+    // Displays progress bar while loading.
     private fun displayProgressBar(isDisplayed: Boolean) {
-        //binding.progressBar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
+    // Displays when error occurs.
     private fun displayError(message: String?) {
-        //if (message != null) binding.text.text = message else binding.text.text = "Unknown error."
+        if (message != null) binding.errorText.text = message else binding.errorText.text =
+            getString(
+                R.string.unknown_error
+            )
     }
 }

@@ -3,6 +3,7 @@ package com.osmancancinar.skeleton.framework.presentation.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.osmancancinar.skeleton.business.domain.models.Model
 
+// Custom Diff Util Class to achieve better performance for listing.
 class RecyclerViewDiffUtil(
     private val oldList: List<Model>,
     private val newList: List<Model>,

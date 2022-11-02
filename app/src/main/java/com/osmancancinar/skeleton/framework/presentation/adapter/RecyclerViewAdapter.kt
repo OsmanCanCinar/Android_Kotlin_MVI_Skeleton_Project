@@ -11,6 +11,7 @@ import com.osmancancinar.skeleton.business.domain.models.Model
 import com.osmancancinar.skeleton.databinding.RecyclerRowBinding
 import com.osmancancinar.skeleton.framework.presentation.view.MainFragmentDirections
 
+// Custom Recycler View Adapter with usage of view binding.
 class RecyclerViewAdapter() :
     RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>(),
     RecyclerViewClickListener {

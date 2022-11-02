@@ -5,9 +5,9 @@ import androidx.room.Room
 import com.osmancancinar.skeleton.business.data.cache.CacheDataSource
 import com.osmancancinar.skeleton.business.data.cache.CacheDataSourceImpl
 import com.osmancancinar.skeleton.business.domain.models.Model
-import com.osmancancinar.skeleton.business.domain.util.EntityMapper
-import com.osmancancinar.skeleton.framework.data_source.cache.DaoService
-import com.osmancancinar.skeleton.framework.data_source.cache.DaoServiceImpl
+import com.osmancancinar.skeleton.business.domain.util.mappers.EntityMapper
+import com.osmancancinar.skeleton.framework.data_source.cache.service.DaoService
+import com.osmancancinar.skeleton.framework.data_source.cache.service.DaoServiceImpl
 import com.osmancancinar.skeleton.framework.data_source.cache.database.AppDao
 import com.osmancancinar.skeleton.framework.data_source.cache.database.Database
 import com.osmancancinar.skeleton.framework.data_source.cache.mappers.CacheMapper
@@ -19,6 +19,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Dependency Injection for Cache Module.Provides Cache Mapper, Database, App Dao, Dao Service & Network Data Source.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object CacheModule {
