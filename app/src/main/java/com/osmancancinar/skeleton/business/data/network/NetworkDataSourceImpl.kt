@@ -11,8 +11,6 @@ class NetworkDataSourceImpl constructor(
     private val APIService: APIService,
     private val networkMapper: NetworkMapper
 ) : NetworkDataSource {
-
-
     // Gets all of the Network Models from api and returns a list of data models for UI.
     override suspend fun get(): List<Model> {
         return networkMapper.mapFromEntityList(APIService.get())

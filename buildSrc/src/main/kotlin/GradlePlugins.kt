@@ -1,4 +1,4 @@
-object GradlePluginId {
+object GradlePlugins {
     const val ANDROID_APP = "com.android.application"
     const val ANDROID_LIB = "com.android.library"
     const val HILT = "com.google.dagger.hilt.android"

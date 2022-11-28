@@ -10,6 +10,7 @@
         android:id="@+id/item_container"
         android:layout_width="0dp"
         android:layout_height="140dp"
+        android:transitionName="image_row"
         android:layout_margin="8dp"
         android:background="@drawable/row_bg"
         app:layout_constraintBottom_toBottomOf="parent"

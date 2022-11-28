@@ -45,6 +45,8 @@ class RecyclerViewAdapter() :
         holder.itemView.setOnClickListener {
             onClick(it, oldList[position].id)
         }
+
+        holder.binding.itemImage.transitionName = oldList[position].image
     }
 
     override fun getItemCount(): Int {

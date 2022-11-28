@@ -1,24 +1,24 @@
 plugins {
-    id(GradlePluginId.ANDROID_APP)
-    id(GradlePluginId.HILT)
-    id(GradlePluginId.KOTLIN_JETBRAINS)
-    id(GradlePluginId.KOTLIN_ANDROID)
-    id(GradlePluginId.SAFE_ARGS)
-    id(GradlePluginId.KOTLIN_KAPT)
+    id(GradlePlugins.ANDROID_APP)
+    id(GradlePlugins.HILT)
+    id(GradlePlugins.KOTLIN_JETBRAINS)
+    id(GradlePlugins.KOTLIN_ANDROID)
+    id(GradlePlugins.SAFE_ARGS)
+    id(GradlePlugins.KOTLIN_KAPT)
 }
 
 android {
-    namespace = ApplicationConfig.APPLICATION_ID
-    compileSdk = ApplicationConfig.COMPILE_SDK
+    namespace = AppConfig.APP_ID
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        applicationId = ApplicationConfig.APPLICATION_ID
-        minSdk = ApplicationConfig.MIN_SDK
-        targetSdk = ApplicationConfig.TARGET_SDK
-        versionCode = ApplicationConfig.VERSION_CODE
-        versionName = ApplicationConfig.VERSION_NAME
+        applicationId = AppConfig.APP_ID
+        minSdk = AppConfig.MIN_SDK
+        targetSdk = AppConfig.TARGET_SDK
+        versionCode = AppConfig.VERSION_CODE
+        versionName = AppConfig.VERSION_NAME
 
-        testInstrumentationRunner = ApplicationConfig.TEST_INST_RUNNER
+        testInstrumentationRunner = AppConfig.TEST_INST_RUNNER
     }
 
     buildFeatures {
@@ -28,26 +28,52 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+        }
+    }
+
+    flavorDimensions += listOf("mode", "testing")
+
+    productFlavors {
+        create("free") {
+            // Assigns this product flavor to the "mode" flavor dimension.
+            dimension = "mode"
+            applicationIdSuffix = ".free"
+            manifestPlaceholders["free"] = "free"
+        }
+
+        create("paid") {
+            dimension = "mode"
+            applicationIdSuffix = ".paid"
+            manifestPlaceholders["paid"] = "paid"
+        }
+
+        create("qa") {
+            dimension = "testing"
+            applicationIdSuffix = ".qa"
+            manifestPlaceholders["qa"] = "qa"
         }
     }
 
     java {
-        sourceCompatibility = ApplicationConfig.JAVA
-        targetCompatibility = ApplicationConfig.JAVA
+        sourceCompatibility = AppConfig.JAVA
+        targetCompatibility = AppConfig.JAVA
     }
 
     compileOptions {
-        sourceCompatibility = ApplicationConfig.JAVA
-        targetCompatibility = ApplicationConfig.JAVA
+        sourceCompatibility = AppConfig.JAVA
+        targetCompatibility = AppConfig.JAVA
     }
 
     kotlinOptions {
-        jvmTarget = ApplicationConfig.JVM_TARGET
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 
